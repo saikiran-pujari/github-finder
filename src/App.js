@@ -4,6 +4,7 @@ import Navbar from "./components/layout/Navbar";
 import Users from "./components/layout/users/Users";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
+import About from "./components/pages/About";
 import Alert from "./components/layout/Alert";
 import Search from "./components/layout/users/Search";
 class App extends Component {
@@ -55,6 +56,7 @@ class App extends Component {
                   </Fragment>
                 }
               />
+              <Route exact path="/about" element={<About />} />
             </Routes>
           </div>
         </div>
