@@ -1,7 +1,8 @@
 import "./App.css";
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Navbar from "./components/layout/Navbar";
 import Users from "./components/layout/users/Users";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import Alert from "./components/layout/Alert";
 import Search from "./components/layout/users/Search";
@@ -26,26 +27,38 @@ class App extends Component {
   }
   // alert
   setAlert(msg, type) {
-    console.log(msg, type);
-
     this.setState({ alert: { msg, type } });
+
+    setTimeout(() => this.setState({ alert: null }), 5000);
   }
   render() {
     const { users, loading } = this.state;
     return (
-      <div className="App">
-        <Navbar />
-        <div className="container">
-          <Alert alert={this.state.alert} />
-          <Search
-            searchUsers={(t) => this.searchUsers(t)}
-            clearUsers={(e) => this.clearUsers(e)}
-            showClear={users.length > 0 ? true : false}
-            setAlert={this.setAlert}
-          />
-          <Users loading={loading} users={users} />
+      <Router>
+        <div className="App">
+          <Navbar />
+          <div className="container">
+            <Alert alert={this.state.alert} />
+            <Routes>
+              <Route
+                exact
+                path="/"
+                element={
+                  <Fragment>
+                    <Search
+                      searchUsers={(t) => this.searchUsers(t)}
+                      clearUsers={(e) => this.clearUsers(e)}
+                      showClear={users.length > 0 ? true : false}
+                      setAlert={(e) => this.setAlert(e)}
+                    />
+                    <Users loading={loading} users={users} />
+                  </Fragment>
+                }
+              />
+            </Routes>
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
