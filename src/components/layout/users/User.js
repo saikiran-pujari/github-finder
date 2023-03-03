@@ -108,6 +108,7 @@ class User extends Component {
             </div>
             <div className="badge badge-dark">Public Gists: {public_gists}</div>
           </div>
+          <h2>Top 5 Repos:</h2>
           <Repos repos={this.props.repos} />
         </Fragment>
       </div>
