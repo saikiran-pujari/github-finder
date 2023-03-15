@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import PropTypes from "prop-types";
 import GithubContext from "../../../context/githubContext";
 import AlertContext from "../../../context/alert/alertContext";
 
@@ -40,15 +39,16 @@ const Search = () => {
           className="btn btn-dark btn-block"
         />
       </form>
-      {
-        // githubContext.users.length > 0 &&
+      {githubContext.users.length > 0 && (
         <button
           className="btn btn-light btn-block"
-          onClick={GithubContext.clearUsers}
+          onClick={() => {
+            githubContext.clearUsers();
+          }}
         >
           Clear
         </button>
-      }
+      )}
     </div>
   );
 };
